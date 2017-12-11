@@ -1,6 +1,33 @@
 <template name="useCaseSelection">
-    {{> modalSaaSautomation}}
-    <div class="ui three column centered grid">
+    <div class="backGroundImageColor">
+
+    </div>
+    <div class="ui two column grid landing">
+        <div class="column selectRole">
+            <h1>OEM Partner Sequence Of Events</h1>
+            <p>At Qlik® we encourage our partners and prospects to leverage our self service technical and business content to support their evaluation and provide you with the materials you need to successfully evaluate the use of Qlik® Sense as part of your Solution(s). </p>
+            <p>Select your role to start your journey&nbsp;&nbsp;</p>
+            <p>
+                <select class="ui dropdown" id="bodyDropdown">
+                    <option value=" ">Select your role</option> 
+                </select>     
+            </p>
+        </div>
+
+        <div class="row secondRow">
+                <p>Our goal is to provide you with all of the necessary materials and information that you will need during your evaluation and be available to assist you during your process, so that you can… </p>     
+                <p>Quickly evaluate Qlik Sense so that you can get to market with an analytic solution within a quick timeframe </p>
+                <p>Thoroughly evaluate Qlik Sense to ensure that it is a good technical fit </p>
+                <p>Confidently make a decision to leverage Qlik Sense in your Solution(s), build the business relationship with Qlik, and leverage the resources of our partnership program</p>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!--<div class="ui three column centered grid">
         <div class="row">
             <h3 class="ui left aligned dividing header">Please select your demo</h3>
         </div>
@@ -54,7 +81,7 @@
                 <div class="content">
                     <a href="{{webIntegrationDemo}}" class="header webIntegrationDemo">Embed Qlik Sense</a>
                     <div class="meta">
-                        <span class="date">Here we demonstrate how you can embed the Qlik Sense hub, sheets, individual objects or just the data. <!-- Also we show the "data only use case", we you just "query" our data model and use your own HTML/JS to vizualize the content.  using an IFrame, DIV or javascript--> </span> 
+                        <span class="date">Here we demonstrate how you can embed the Qlik Sense hub, sheets or individual objects. Also we show the "data only use case", we you just "query" our data model and use your own HTML/JS to vizualize the content.</span>
                     </div>
                 </div>
             </div>
@@ -93,5 +120,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </template>

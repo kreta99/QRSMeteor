@@ -1,14 +1,24 @@
-settings-development.json
 settings-production.json
+node_modules/
+.build/
+node_modules/
+settings.json
+*.txt
 *.cert
 *.pem
-node_modules/
 customerData/
 .vscode/typings/meteor.d.ts
 *.sublime-workspace
 public/docs/~$ik Sense SaaS demo tool setup instructions.docx
 *.bak
 
-automation/ExtractedvirtualProxyDefinitions.json
-automation/ExtractedvirtualProxyDefinitions.json
-automation/ExtractedvirtualProxyDefinitions.json
+.automation/virtualProxyServiceConfiguration.json
+.automation/proxy/export/virtualProxyServiceConfiguration.json
+.automation/securityrules/export/ExtractedSystemRules.json
+.automation/proxy/export/virtualProxyServiceConfiguration.json
+.automation/InstallationSoftware/Qlik_Sense_setup.exe
+.automation/InstallationSoftware/spc.cfg
+.automation/securityrules/export/ExtractedSystemRules.json
+.automation/proxy/export/proxyServiceConfiguration.json
+package-lock.json
+.automation/customProperties/export/ExtractedCustomProperties.json

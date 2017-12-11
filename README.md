@@ -1,11 +1,13 @@
 # TLDR
-With this project you can create apps for each customer based on a template app. (and much more). (In other words, you get software to get a 'publisher' for Qlik Sense)
+Install meteor.com then run this application and you will get the full integration.qlik.com environment including the SaaS app provisioning demo, documentation etc on your local server. 
+
+With this project you can create apps for each customer based on a template app. (and much more). (In other words,you get software to get an 'app publisher' for Qlik Sense)
 A live running instance of this code is visible at [integration.qlik.com](http://integration.qlik.com)
-Also make sure you checkout the [slide generator](http://integration.qlik.com/slides), which explains SaaS integration using the Qlik Sense APIs. Written documentation [here](http://integration.qlik.com/documentation)
+Also make sure you checkout the [slide generator](http://integration.qlik.com/slides), which explains SaaS integration using the Qlik Sense APIs.
 
 # Welcome to the SaaS with Qlik Sense demo platfom
 
-Assumption: you want to know how to use Qlik Sense in a multi-tenant scenario. (and basically get a smart Qlik Sense publisher, based on the customers and their users stored in your database)
+Assumption: you want to know you to use Qlik Sense in a multi-tenant scenario.
 - you have customers
 - you want to create a template apps
 - automatically setup Qlik Sense for each customer.
@@ -66,17 +68,19 @@ The internal REST calls use both certificate (QPS logout for example) and header
 
 ## Setup your own SaaS provisioning system using this code
 
-!!! this project is currently being migrated from a manual installation to full automatic deployment and a better layout. Therefore the source code won't run at the moment.!!!
-
 See [this manual](https://github.com/QHose/QRSMeteor/blob/master/public/docs/Qlik%20Sense%20SaaS%20demo%20tool%20setup%20instructions.docx) 
 
 ### Summary of the new automatic installation
 - install meteor
 - Clone QRSMeteor in some 'project root' directory
-- update settings.json file. Make sure you the the host, webIntegrationHost, internalLanIP, and port settings. If you install everything (qlik sense and the 2 meteor project on one machine, use  the hostname, not localhost!). Update your Qlik Sense license. Set the customerDataDir, automationBaseFolder
+- make a copy of the settings-development-example.json and update it. Make sure you update at least the host, webIntegrationHost, internalLanIP (hostname of Qlik Sense inside your LAN, this is just your computer name for simple setups), and port settings. If you install everything (qlik sense and the 2 meteor project on one machine, use  the hostname, not localhost!). Update your Qlik Sense license. Set the customerDataDir, automationBaseFolder
 
 ### Docker 
 I also created docker images but they are not yet ready to be used. (they can be used but contain an older version of this project) 
+* docker pull qhose/qrsmeteor
+* docker pull qhose/sensewebintegration
+
+[See this flow chart](https://www.lucidchart.com/documents/embeddedchart/feaf7d0e-cd67-44f5-ad35-ea849ff6d274). If want to know how to build a node image from a windows meteor project. Mind the tabs in the top with build and run. 
 
 # Install your own deployment using the source code 
 [see this manual](https://github.com/QHose/QRSMeteor/blob/master/public/docs/Qlik%20Sense%20SaaS%20demo%20tool%20documentation%20of%20source%20code.docx) to learn more about this source code.

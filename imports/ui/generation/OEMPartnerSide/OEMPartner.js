@@ -83,7 +83,7 @@ Template.OEMPartner.events({
                 Session.set('loadingIndicator', '');
             } else {
                 Session.set('loadingIndicator', '');
-                Session.set('currentUser',null);
+                Session.set('currentUser', null);
                 sAlert.success("Qlik Sense has been cleaned up: we have removed all previously provisioned streams and apps");
             }
         });
@@ -139,7 +139,7 @@ export function insertTemplateAndDummyCustomers() {
 
     // const templateAppId = Meteor.settings.public.templateAppId;
     // console.log('Insert insertTemplateAndDummyCustomers, with templateAppId', templateAppId);
-    
+
 
     // TemplateApps.insert({
     //     name: "My first template",

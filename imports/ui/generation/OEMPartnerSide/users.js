@@ -1,11 +1,27 @@
-import { Template } from 'meteor/templating';
-import { senseConfig as config } from '/imports/api/config.js';
-import { ironRouter } from 'meteor/iron:router';
-import { Apps, TemplateApps } from '/imports/api/apps.js'
-import { Customers, dummyCustomers } from '/imports/api/customers.js';
-import { Streams } from '/imports/api/streams.js'
+import {
+    Template
+} from 'meteor/templating';
+import {
+    senseConfig as config
+} from '/imports/api/config.js';
+import {
+    ironRouter
+} from 'meteor/iron:router';
+import {
+    Apps,
+    TemplateApps
+} from '/imports/api/apps.js'
+import {
+    Customers,
+    dummyCustomers
+} from '/imports/api/customers.js';
+import {
+    Streams
+} from '/imports/api/streams.js'
 import '/imports/ui/UIHelpers';
-import { insertTemplateAndDummyCustomers } from '/imports/ui/generation/OEMPartnerSide/OEMPartner';
+import {
+    insertTemplateAndDummyCustomers
+} from '/imports/ui/generation/OEMPartnerSide/OEMPartner';
 
 import './users.html';
 
@@ -30,7 +46,7 @@ AutoForm.addHooks(['insertCustomerForm'], {
     // },
 });
 
-SimpleSchema.debug = true;
+SimpleSchema.debug = false;
 
 Template.users.helpers({
     autoSaveMode: function() {
@@ -56,9 +72,9 @@ Template.users.helpers({
     active: function() {
         return Session.equals("activeCustomer", this._id) ? "active" : '';
     },
-    isChrome: function(){ //update screen does not work with edge and firefox because of a bug somehwere
+    isChrome: function() { //update screen does not work with edge and firefox because of a bug somehwere
         var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-        console.log('user is using Chrome? ',isChrome);
+        console.log('user is using Chrome? ', isChrome);
         return isChrome;
     }
 });
@@ -95,15 +111,6 @@ Template.updateGroupsFormStep1.events({
             currentlyLoggedIn: false
         };
 
-        // template.find('.ui.dropdown').dropdown('set text', 'bies');
-        // setTimeout(function() {
-        //     template.$('.ui.dropdown.country')
-        //         .dropdown('set text', updatedUser.country);
-        //     template.$('.ui.dropdown.group')
-        //         .dropdown('set text', updatedUser.group);
-        //     // console.log('set group box to', updatedUser.group);
-        // }, 300)
-
         Meteor.call('updateUserForCustomer', updatedUser);
         sAlert.success('Groups are updated for ' + updatedUser.name);
     }
@@ -127,7 +134,7 @@ Template.users.events({
     'click .backToGeneration' () {
         console.log('go to step 2 clicked')
         Session.set('currentStep', 2);
-        Router.go('generation');
+        Router.go('generation_embedded');
     },
     'click .customer-row': function() {
         Session.set("selectedCustomerStep1", this._id);
@@ -138,7 +145,9 @@ Template.users.events({
     },
     'click .insertNewCustomer' () {
         $('#insertCustomer').modal('show')
-            .modal({ observeChanges: true });
+            .modal({
+                observeChanges: true
+            });
         refreshModal();
     }
 
@@ -146,7 +155,9 @@ Template.users.events({
 
 
 function refreshModal() {
-    Meteor.setTimeout(function() { refreshModal() }, 1);
+    Meteor.setTimeout(function() {
+        refreshModal()
+    }, 1);
     return $('#insertCustomer').modal('refresh');
 }
 Template.insertCustomer.events({
@@ -185,4 +196,13 @@ Template.insertCustomer.onRendered(function() {  
 Template.users.onCreated(function() {
     // this.subscribe('customers');
     Session.set('currentStep', 1);
+
+    //see https://guide.meteor.com/data-loading.html     
+    const customersHandle = Meteor.subscribe('customers', { //http://stackoverflow.com/questions/28621132/meteor-subscribe-callback
+        onReady: function() {},
+        onError: function() {
+            console.log("onError", arguments);
+        }
+    });
+
 })

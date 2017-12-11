@@ -1,0 +1,58 @@
+<template name="slidesContainerIFrame">
+  <iframe allowfullscreen src="{{pathFor 'slides'}}" class="frame"></iframe>
+</template>
+
+
+
+<template name="slides">
+  <!-- for each header: a level 1 and 2 combination -->
+  <!--         Create a chapter breaker if the level 1 has changed in the current row-->
+  <!-- The current level 1 and 2 headers -->
+
+  <div class="reveal">
+    <div class="slides">
+      {{#each slideHeaders }}
+        {{#if chapterSlide this}}
+          <section data-autoslide="2000">
+            <div class="ui segment integrationBreaker">
+              <h1 class="ui header" style="font-size: 50px;">
+                Next: {{this}}
+                <!-- The current level 1 and 2 headers -->
+              </h1>
+            </div>
+          </section>
+        {{else}}
+          {{> slide slide=this slideNr=@index}}
+        {{/if}}
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="slide">
+  <section style="text-align: left;">
+    <h3> {{{level 1 slide}}}</h3>
+    <h1>{{{level 2 slide}}}
+      <hr>
+    </h1>
+    {{#if active slideNr}}
+      {{> slideContent slide=slide}}
+    {{/if}}
+    <!-- <div class="controls">
+      <i class="navigate-right angle right icon"></i>
+    </div>
+    {{> termsOfUsage}}      
+ -->
+
+  </section>
+
+</template>
+
+
+<template name="slideContent">
+  <div class="slideContent">
+    {{#each item in itemsOfLevel 3 slide}}
+      {{{formatted item}}}
+    {{/each}}
+  </div>
+</template>

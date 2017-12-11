@@ -1,5 +1,15 @@
-import { Template } from 'meteor/templating';
-import { Meteor } from 'meteor/meteor';
+import {
+    Template
+} from 'meteor/templating';
+import {
+    Meteor
+} from 'meteor/meteor';
+import {
+    Session
+} from 'meteor/session';
+import {
+    senseConfig as config
+} from '/imports/api/config';
 
 import './layout.html';
 import './presentation.html';
@@ -7,7 +17,12 @@ import './presentation';
 import '../checkConfig.html';
 import '/imports/ui/nav.html';
 import '/imports/ui/nav.js';
-// import './pages/modals.html';
+import {
+    getQix
+} from '/imports/ui/useCases/useCaseSelection';
+
+
+const webIntegrationDemo = 'http://' + Meteor.settings.public.webIntegrationHost + ':' + Meteor.settings.public.webIntegrationDemoPort;
 
 Template.layout.helpers({
     NoSenseConnection() {
@@ -19,53 +34,16 @@ Template.loginDimmer.onRendered(function() {
     Template.instance().$('.dimmer')
         .dimmer('show');
 });
-/**
- * detect IE
- * returns version of IE or false, if browser is not Internet Explorer
- */
-export function isIEorEDGE() {
-    var ua = window.navigator.userAgent;
 
-    var msie = ua.indexOf('MSIE ');
-    if(msie > 0) {
-        // IE 10 or older => return version number
-        return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
-    }
-
-    var trident = ua.indexOf('Trident/');
-    if(trident > 0) {
-        // IE 11 => return version number
-        var rv = ua.indexOf('rv:');
-        return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
-    }
-
-    var edge = ua.indexOf('Edge/');
-    if(edge > 0) {
-        // Edge (IE 12+) => return version number
-        return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
-    }
-
-    // other browser
-    return false;
-}
-
-function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? true : false;
-}
-
-export function unsupportedBrowser() {
-    // console.log('unsupported browser?', isIEorEDGE() || isMobile());
-    return isIEorEDGE() || isMobile();
-}
-
-Template.presentationLayout.helpers({
-    userSelectionMade() {
-        return Session.get('groupForPresentation'); //if the user selected a presentation type try to login
-    },
-    unsupportedBrowser() {
-        return unsupportedBrowser();
-    }
+Template.modalSaaSautomation.onRendered(function() {
+    this.$('.ui.embed').embed();
 });
+
+Template.emptyContainerLayout.events({
+    'keydown, click': function(event, template) {
+        Template.instance().$('*').popup('remove popup')
+    }
+})
 
 Template.layout.events({
     'keydown, click': function(event, template) {
@@ -112,6 +90,30 @@ Template.layout.onCreated(function() {
             //     Session.setAuth('currentStep', 3);
             // };
         },
-        onError: function() { console.log("onError", arguments); }
+        onError: function() {
+            console.log("onError", arguments);
+        }
     });
 });
+
+
+// Template.slideSelectionSheet.onRendered(function() {
+//     $('#sheetSelector').modal({
+//         // onHide: async function() {
+//         //     await abortQlikModalState();
+//         // },
+//         onHidden: async function() {
+//             console.log('------------------------------------');
+//             console.log('on hidden clicked');
+//             console.log('------------------------------------');
+//             await abortQlikModalState();
+//         },
+//         onHide: function() {
+//             console.log('hidden');
+
+//         },
+//         onShow: function() {
+//             console.log('shown');
+//         },
+//     })
+// })
